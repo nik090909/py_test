@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<form method="post" action="/add/">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <table>
+         <tbody id="tname">
+         <tr>
+             <td>
+         <div class="fieldWrapper">
+             {{ form.name.errors }}
+             <label for="id_name">Name:</label>
+             {{ form.name }}
+             <button class="add_name">Add</button>
+         </div>
+             </td>
+         </tr>
+         </tbody>
+    </table>
+    <table>
+         <tbody id="temail">
+         <tr>
+             <td>
+         <div class="fieldWrapper">
+             {{ form.email.errors }}
+             <label for="id_email">Email:</label>
+             {{ form.email }}
+             <button class="add_email">Add</button>
+         </div>
+         </td>
+         </tr>
+         </tbody>
+    </table>
+    <input type="submit">
+</form>
+<script>
+    name_count = email_count = 1;
+
+    $('.add_name').on('click', function () {
+        $('#tname').append('<tr><td><div class="fieldWrapper"><label for="id_name' + name_count + '">Name' + name_count + ':</label><input id="id_name' + name_count + '" name="name' + name_count + '" type="text" required /></div></td></tr>')
+        name_count++;
+        return false
+    })
+
+    $('.add_email').on('click', function () {
+        $('#temail').append('<tr><td><div class="fieldWrapper"><label for="id_email' + email_count + '">Email' + email_count + ':</label><input id="id_email' + email_count + '" name="email' + email_count + '" type="email" required /></div></td></tr>')
+        email_count++;
+        return false
+    })
+</script>
+</body>
+</html>
